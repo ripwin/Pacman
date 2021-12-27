@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Content.Pipeline;
+using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Graphics;
 using Pacman.ContentPipelineExtension.TiledMap.Content;
 using Pacman.ContentPipelineExtension.TiledMap.Serialization.Tmx;

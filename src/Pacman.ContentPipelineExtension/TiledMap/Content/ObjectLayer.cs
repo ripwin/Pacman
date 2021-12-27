@@ -1,4 +1,4 @@
-﻿namespace Pacman.ContentPipelineExtension.TiledMap.Content
+namespace Pacman.ContentPipelineExtension.TiledMap.Content
 {
     public class ObjectLayer
     {

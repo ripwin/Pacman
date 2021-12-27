@@ -82,7 +82,7 @@ namespace Pacman.ContentPipelineExtension.TiledMap
 
                 // Ellipses
                 output.Write(layer.Ellipses.Count);
-                
+
                 foreach (var (name, type, x, y, width, height, properties) in layer.Ellipses)
                 {
                     output.Write(name);

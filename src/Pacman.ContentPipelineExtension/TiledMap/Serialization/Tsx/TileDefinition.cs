@@ -1,4 +1,4 @@
-﻿namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tsx
+namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tsx
 {
     public class TileDefinition
     {

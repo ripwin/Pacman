@@ -1,4 +1,4 @@
-﻿using System.Xml.Serialization;
+using System.Xml.Serialization;
 
 namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Common
 {
