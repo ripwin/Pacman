@@ -10,6 +10,12 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\Pacman.ContentPipelineExtension\bin\Debug\netstandard2.1\Pacman.ContentPipelineExtension.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin level_1.tmx
+/importer:TmxImporter
+/processor:TmxProcessor
+/build:level_1.tmx
 

@@ -12,9 +12,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pacman.DesktopGL", "src\Pacman.DesktopGL\Pacman.DesktopGL.csproj", "{8B2BD531-FCEA-4A4F-A1CA-6264DE699A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pacman.DesktopGL", "src\Pacman.DesktopGL\Pacman.DesktopGL.csproj", "{8B2BD531-FCEA-4A4F-A1CA-6264DE699A85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F} = {FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pacman.Core", "src\Pacman.Core\Pacman.Core.csproj", "{59374231-723E-486C-9C12-5E67D33707ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pacman.Core", "src\Pacman.Core\Pacman.Core.csproj", "{59374231-723E-486C-9C12-5E67D33707ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pacman.ContentPipelineExtension", "src\Pacman.ContentPipelineExtension\Pacman.ContentPipelineExtension.csproj", "{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +35,10 @@ Global
 		{59374231-723E-486C-9C12-5E67D33707ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59374231-723E-486C-9C12-5E67D33707ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59374231-723E-486C-9C12-5E67D33707ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +46,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8B2BD531-FCEA-4A4F-A1CA-6264DE699A85} = {DAF459A6-E7B6-4A76-A835-AD25F4A6815C}
 		{59374231-723E-486C-9C12-5E67D33707ED} = {DAF459A6-E7B6-4A76-A835-AD25F4A6815C}
+		{FF948F51-DDD5-4AC7-B8FA-0A84B4D2E71F} = {DAF459A6-E7B6-4A76-A835-AD25F4A6815C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {991489AF-2B8D-4B91-ACC4-151718CB54FD}

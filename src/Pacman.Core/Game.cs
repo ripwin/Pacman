@@ -7,20 +7,20 @@ namespace Pacman.Core
 {
     public sealed class Game : Microsoft.Xna.Framework.Game
     {
-        public const int Height = 400;
-        public const int Width = 600;
+        public readonly static string ContentFolderPath = "Content";
+
+        public const int Height = 36 * 16;
+        public const int Width = 28 * 16;
         public const int Scale = 2;
 
         private readonly GraphicsDeviceManager _graphics;
-        private IScene _scene;
-
-        public Input Input { get; }
+        private IScene? _scene;
 
         public Game()
         {
             _graphics = new GraphicsDeviceManager(this);
 
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = ContentFolderPath;
             IsMouseVisible = true;
 
             Input = new Input();
@@ -46,9 +46,11 @@ namespace Pacman.Core
             Input.Update(Keyboard.GetState());
 
             if (Input.IsKeyDown(Keys.Escape))
+            { 
                 Exit();
+            }
 
-            _scene.Update(gameTime);
+            _scene!.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -57,16 +59,18 @@ namespace Pacman.Core
         {
             GraphicsDevice.Clear(Color.Black);
 
-            _scene.Draw(gameTime);
+            _scene!.Draw(gameTime);
 
             base.Draw(gameTime);
         }
 
-        public void ChangeScene(IScene scene)
+        internal void ChangeScene(IScene scene)
         {
-            _scene.Dispose();
+            _scene!.Dispose();
 
             _scene = scene;
         }
+
+        internal Input Input { get; }
     }
 }
