@@ -9,6 +9,12 @@ namespace Pacman.Core.Systems
 {
     internal sealed class MapSystem : AComponentSystem<GameTime, TileComponent>
     {
+        private readonly static string Pacman = "Pacman";
+        private readonly static string Inky = "Inky";
+        private readonly static string Pinky = "Pinky";
+        private readonly static string Clyde = "Clyde";
+        private readonly static string Blinky = "Blinky";
+
         private readonly Map _map;
         private readonly World _world;
 
@@ -24,6 +30,10 @@ namespace Pacman.Core.Systems
                 if (layer is TileLayer tileLayer)
                 {
                     InitTileLayer(tileLayer);
+                }
+                else if (layer is ObjectLayer objectLayer)
+                {
+                    InitObjectLayer(objectLayer);
                 }
             }
         }
@@ -43,19 +53,60 @@ namespace Pacman.Core.Systems
                 var tileset = _map.Tilesets.Where(t => t.Contains(tile)).Single();
                 var definition = tileset.GetDefinition(tile);
 
-                var tileEntity = _world.CreateEntity();
-
-                tileEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth, (i / _map.Width) * _map.TileHeight) });
-
-                var tileComponent = new TileComponent { Value = tileLayer.Tiles[i].Value, Type = TileType.None };
-
                 if (!string.IsNullOrWhiteSpace(definition.Type) && Enum.TryParse<TileType>(definition.Type, out var type))
                 {
-                    tileComponent.Type = type;
+                    var tileEntity = _world.CreateEntity();
+                    tileEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth, (i / _map.Width) * _map.TileHeight) });
                     tileEntity.Set(new AabbComponent { Size = new Vector2(_map.TileWidth, _map.TileHeight) });
+                    tileEntity.Set(new TileComponent { Value = tileLayer.Tiles[i].Value, Type = type });
                 }
+            }
+        }
 
-                tileEntity.Set(tileComponent);
+        private void InitObjectLayer(ObjectLayer objectLayer)
+        {
+            foreach (var o in objectLayer.Objects)
+            {
+                if (o.Name.Equals(Pacman) && o is TiledMap.Rectangle pacman)
+                {
+                    var entity = _world.CreateEntity();
+                    entity.Set<PacmanComponent>();
+                    entity.Set(new BodyComponent { Position = new Vector2(pacman.X, pacman.Y) });
+                    entity.Set(new AabbComponent { Size = new Vector2(pacman.Width, pacman.Height) });
+                    entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Pacman });
+                }
+                else if (o.Name.Equals(Inky) && o is TiledMap.Rectangle inky)
+                {
+                    var entity = _world.CreateEntity();
+                    entity.Set<GhostComponent>();
+                    entity.Set(new BodyComponent { Position = new Vector2(inky.X, inky.Y) });
+                    entity.Set(new AabbComponent { Size = new Vector2(inky.Width, inky.Height) });
+                    entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Inky });
+                }
+                else if (o.Name.Equals(Pinky) && o is TiledMap.Rectangle pinky)
+                {
+                    var entity = _world.CreateEntity();
+                    entity.Set<GhostComponent>();
+                    entity.Set(new BodyComponent { Position = new Vector2(pinky.X, pinky.Y) });
+                    entity.Set(new AabbComponent { Size = new Vector2(pinky.Width, pinky.Height) });
+                    entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Pinky });
+                }
+                else if (o.Name.Equals(Clyde) && o is TiledMap.Rectangle clyde)
+                {
+                    var entity = _world.CreateEntity();
+                    entity.Set<GhostComponent>();
+                    entity.Set(new BodyComponent { Position = new Vector2(clyde.X, clyde.Y) });
+                    entity.Set(new AabbComponent { Size = new Vector2(clyde.Width, clyde.Height) });
+                    entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Clyde });
+                }
+                else if (o.Name.Equals(Blinky) && o is TiledMap.Rectangle blinky)
+                {
+                    var entity = _world.CreateEntity();
+                    entity.Set<GhostComponent>();
+                    entity.Set(new BodyComponent { Position = new Vector2(blinky.X, blinky.Y) });
+                    entity.Set(new AabbComponent { Size = new Vector2(blinky.Width, blinky.Height) });
+                    entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Blinky });
+                }
             }
         }
     }

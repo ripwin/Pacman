@@ -3,6 +3,8 @@ using DefaultEcs.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Pacman.Core.Enums;
+using Pacman.Core.Graphics;
 using Pacman.Core.Systems;
 using Pacman.Core.TiledMap;
 
@@ -30,8 +32,16 @@ namespace Pacman.Core.Screens
             _onUpdateSystem = new SequentialSystem<GameTime>(
                 new MapSystem(_world, map));
 
+            var pacmanTextureAtlas = new TextureAtlas<PacmanTextureAtlas>(_content.Load<Texture2D>("pacman_tileset"));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Blinky, new Microsoft.Xna.Framework.Rectangle(32, 32, 32, 32));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Clyde, new Microsoft.Xna.Framework.Rectangle(32, 128, 32, 32));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Inky, new Microsoft.Xna.Framework.Rectangle(32, 96, 32, 32));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Pinky, new Microsoft.Xna.Framework.Rectangle(32, 64, 32, 32));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Pacman, new Microsoft.Xna.Framework.Rectangle(32, 0, 32, 32));
+
             _onRenderSystem = new SequentialSystem<GameTime>(
-                new MapGraphicsSystem(_world, map, _spriteBatch));
+                new MapGraphicsSystem(_world, map, _spriteBatch),
+                new GraphicsSystem(_world, _spriteBatch, pacmanTextureAtlas));
         }
 
         public void Draw(GameTime gameTime)

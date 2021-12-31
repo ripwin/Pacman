@@ -1069,9 +1069,9 @@
  </layer>
  <objectgroup id="21" name="Object Layer 1">
   <object id="39" name="Pacman" x="216" y="320" width="16" height="16"/>
-  <object id="41" name="Blinky " x="216" y="224" width="16" height="16"/>
+  <object id="41" name="Blinky" x="216" y="224" width="16" height="16"/>
   <object id="43" name="Pinky" x="216" y="272" width="16" height="16"/>
-  <object id="44" name="Inky " x="184" y="272" width="16" height="16"/>
-  <object id="45" name="Clyde " x="248" y="272" width="16" height="16"/>
+  <object id="44" name="Inky" x="184" y="272" width="16" height="16"/>
+  <object id="45" name="Clyde" x="248" y="272" width="16" height="16"/>
  </objectgroup>
 </map>
