@@ -40,6 +40,7 @@ namespace Pacman.Core.Screens
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Pacman, new Microsoft.Xna.Framework.Rectangle(32, 0, 32, 32));
 
             _onRenderSystem = new SequentialSystem<GameTime>(
+                new PacmanSystem(_world, game.Input),
                 new MapGraphicsSystem(_world, map, _spriteBatch),
                 new GraphicsSystem(_world, _spriteBatch, pacmanTextureAtlas));
         }

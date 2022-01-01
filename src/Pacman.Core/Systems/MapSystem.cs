@@ -74,6 +74,7 @@ namespace Pacman.Core.Systems
                     entity.Set(new BodyComponent { Position = new Vector2(pacman.X, pacman.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(pacman.Width, pacman.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Pacman });
+                    entity.Set<VelocityComponent>();
                 }
                 else if (o.Name.Equals(Inky) && o is TiledMap.Rectangle inky)
                 {
@@ -82,6 +83,7 @@ namespace Pacman.Core.Systems
                     entity.Set(new BodyComponent { Position = new Vector2(inky.X, inky.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(inky.Width, inky.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Inky });
+                    entity.Set<VelocityComponent>();
                 }
                 else if (o.Name.Equals(Pinky) && o is TiledMap.Rectangle pinky)
                 {
@@ -90,6 +92,7 @@ namespace Pacman.Core.Systems
                     entity.Set(new BodyComponent { Position = new Vector2(pinky.X, pinky.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(pinky.Width, pinky.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Pinky });
+                    entity.Set<VelocityComponent>();
                 }
                 else if (o.Name.Equals(Clyde) && o is TiledMap.Rectangle clyde)
                 {
@@ -98,6 +101,7 @@ namespace Pacman.Core.Systems
                     entity.Set(new BodyComponent { Position = new Vector2(clyde.X, clyde.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(clyde.Width, clyde.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Clyde });
+                    entity.Set<VelocityComponent>();
                 }
                 else if (o.Name.Equals(Blinky) && o is TiledMap.Rectangle blinky)
                 {
@@ -106,6 +110,7 @@ namespace Pacman.Core.Systems
                     entity.Set(new BodyComponent { Position = new Vector2(blinky.X, blinky.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(blinky.Width, blinky.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Blinky });
+                    entity.Set<VelocityComponent>();
                 }
             }
         }

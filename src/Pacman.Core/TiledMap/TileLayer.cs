@@ -27,7 +27,7 @@ namespace Pacman.Core.TiledMap
         {
             if (x < 0 || x > Width || y < 0 || y > Height)
             {
-                throw new ArgumentOutOfRangeException($"The x or y coordinates is out of range !");
+                throw new ArgumentOutOfRangeException($"{nameof(x)}, {nameof(y)}", $"The x '{x}' or y '{y}' coordinates is out of range !");
             }
 
             return Tiles[y * Width + x];
