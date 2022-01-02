@@ -9,7 +9,7 @@ namespace Pacman.Core.Systems
 {
     internal sealed class PacmanSystem : AEntitySetSystem<GameTime>
     {
-        private const int Speed = 5;
+        private const int Speed = 2;
 
         private readonly Input _input;
 
@@ -29,6 +29,8 @@ namespace Pacman.Core.Systems
         {
             ref var pacman = ref entity.Get<PacmanComponent>();
             ref var velocity = ref entity.Get<VelocityComponent>();
+
+            pacman.OldMovement = pacman.Movement;
 
             if (_input.IsKeyDown(Keys.Left))
             {

@@ -3,7 +3,6 @@ using DefaultEcs.System;
 using Microsoft.Xna.Framework;
 using Pacman.Core.Collision;
 using Pacman.Core.Components;
-using Pacman.Core.TiledMap;
 using Pacman.Core.Utils;
 
 namespace Pacman.Core.Systems
@@ -25,7 +24,7 @@ namespace Pacman.Core.Systems
             _movingEntitiesSet = world.GetEntities().With<AabbComponent>().With<BodyComponent>().With<VelocityComponent>().AsSet();
 
             // Load collision 
-            _world.Subscribe(new PacmanCollision(_world));
+            _world.Subscribe(new PacmanCollision());
             //_world.Subscribe(new MobCollision());
         }
 

@@ -17,7 +17,7 @@
         LeftTopRightSolid = 11,
         LeftBottomRightSolid = 12,
         LeftRightSolid = 13,
-        Dot = 1,
-        BigDot = 2,
+        Dot = 14,
+        BigDot = 15,
     }
 }

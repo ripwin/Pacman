@@ -5,5 +5,6 @@ namespace Pacman.Core.Components
     internal struct PacmanComponent
     {
         public MovementType Movement;
+        public MovementType OldMovement;
     }
 }

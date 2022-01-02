@@ -6,135 +6,128 @@ namespace Pacman.Core.Collision
 {
     internal class PacmanCollision
     {
-        private const float _offset = 0.001f;
-
-        private readonly World _world;
-
-        public PacmanCollision(World world)
-        {
-            _world = world;
-        }
-
         [Subscribe]
         void On(in (PacmanComponent, Entity, Entity, Vector2, Vector2, float) message)
         {
-            var (_, player, target, _, _, _) = message;
-            ref var playerComponent = ref player.Get<PacmanComponent>();
-            ref var playerPosition = ref player.Get<BodyComponent>();
-            ref var playerVelocity = ref player.Get<VelocityComponent>();
+            var (_, pacman, target, _, _, _) = message;
+            ref var pacmanComponent = ref pacman.Get<PacmanComponent>();
+            ref var pacmanPosition = ref pacman.Get<BodyComponent>();
+            ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
 
             if (target.Has<TileComponent>())
             {
-                CollidedWithTile(player, target);
+                CollidedWithTile(pacman, target);
             }
         }
 
-        private void CollidedWithTile(Entity player, Entity tile)
+        private void CollidedWithTile(Entity pacman, Entity tile)
         {
             ref var tileComponent = ref tile.Get<TileComponent>();
 
             switch (tileComponent.Type)
             {
                 case Enums.TileType.TopSolid:
-                    TopSolidTileCollision(player, tile);
+                    TopSolidTileCollision(pacman, tile);
                     break;
                 case Enums.TileType.BottomSolid:
-                    BottomSolidTileCollision(player, tile);
+                    BottomSolidTileCollision(pacman, tile);
                     break;
                 case Enums.TileType.LeftSolid:
-                    LeftSolidTileCollision(player, tile);
+                    LeftSolidTileCollision(pacman, tile);
                     break;
                 case Enums.TileType.RightSolid:
-                    RightSolidTileCollision(player, tile);
+                    RightSolidTileCollision(pacman, tile);
                     break;
                 case Enums.TileType.LeftTopSolid:
-                    if (!TopSolidTileCollision(player, tile))
+                    if (!TopSolidTileCollision(pacman, tile))
                     {
-                        LeftSolidTileCollision(player, tile);
+                        LeftSolidTileCollision(pacman, tile);
                     }
                     break;
                 case Enums.TileType.RightTopSolid:
-                    if (!TopSolidTileCollision(player, tile))
+                    if (!TopSolidTileCollision(pacman, tile))
                     {
-                        RightSolidTileCollision(player, tile);
+                        RightSolidTileCollision(pacman, tile);
                     }
                     break;
                 case Enums.TileType.LeftBottonSolid:
-                    if (!BottomSolidTileCollision(player, tile))
+                    if (!BottomSolidTileCollision(pacman, tile))
                     {
-                        LeftSolidTileCollision(player, tile);
+                        LeftSolidTileCollision(pacman, tile);
                     }
                     break;
                 case Enums.TileType.RightBottonSolid:
-                    if (!BottomSolidTileCollision(player, tile))
+                    if (!BottomSolidTileCollision(pacman, tile))
                     {
-                        RightSolidTileCollision(player, tile);
+                        RightSolidTileCollision(pacman, tile);
                     }
                     break;
                 case Enums.TileType.TopBottomSolid:
-                    if (!BottomSolidTileCollision(player, tile))
+                    if (!BottomSolidTileCollision(pacman, tile))
                     {
-                        TopSolidTileCollision(player, tile);
+                        TopSolidTileCollision(pacman, tile);
                     }
                     break;
                 case Enums.TileType.TopLeftBottomSolid:
-                    if (!TopSolidTileCollision(player, tile))
+                    if (!TopSolidTileCollision(pacman, tile))
                     {
-                        if (!LeftSolidTileCollision(player, tile))
+                        if (!LeftSolidTileCollision(pacman, tile))
                         {
-                            BottomSolidTileCollision(player, tile);
+                            BottomSolidTileCollision(pacman, tile);
                         }
                     }
                     break;
                 case Enums.TileType.TopRightBottomSolid:
-                    if (!TopSolidTileCollision(player, tile))
+                    if (!TopSolidTileCollision(pacman, tile))
                     {
-                        if (!RightSolidTileCollision(player, tile))
+                        if (!RightSolidTileCollision(pacman, tile))
                         {
-                            BottomSolidTileCollision(player, tile);
+                            BottomSolidTileCollision(pacman, tile);
                         }
                     }
                     break;
                 case Enums.TileType.LeftTopRightSolid:
-                    if (!LeftSolidTileCollision(player, tile))
+                    if (!LeftSolidTileCollision(pacman, tile))
                     {
-                        if (!TopSolidTileCollision(player, tile))
+                        if (!TopSolidTileCollision(pacman, tile))
                         {
-                            RightSolidTileCollision(player, tile);
+                            RightSolidTileCollision(pacman, tile);
                         }
                     }
                     break;
                 case Enums.TileType.LeftBottomRightSolid:
-                    if (!LeftSolidTileCollision(player, tile))
+                    if (!LeftSolidTileCollision(pacman, tile))
                     {
-                        if (!BottomSolidTileCollision(player, tile))
+                        if (!BottomSolidTileCollision(pacman, tile))
                         {
-                            RightSolidTileCollision(player, tile);
+                            RightSolidTileCollision(pacman, tile);
                         }
                     }
                     break;
                 case Enums.TileType.LeftRightSolid:
-                    if (!LeftSolidTileCollision(player, tile))
+                    if (!LeftSolidTileCollision(pacman, tile))
                     {
-                        RightSolidTileCollision(player, tile);
+                        RightSolidTileCollision(pacman, tile);
                     }
                     break;
             }
         }
 
-        private bool TopSolidTileCollision(Entity player, Entity tile)
+        private bool TopSolidTileCollision(Entity pacman, Entity tile)
         {
-            ref var bodyPosition = ref player.Get<BodyComponent>();
-            ref var playerAabb = ref player.Get<AabbComponent>();
+            ref var bodyPosition = ref pacman.Get<BodyComponent>();
+            ref var pacmanAabb = ref pacman.Get<AabbComponent>();
             ref var tilePosition = ref tile.Get<BodyComponent>();
 
-            var playerOldPositon = bodyPosition.Position;
+            var pacmanOldPositon = bodyPosition.Position;
 
-            if (playerOldPositon.Y + playerAabb.Size.Y <= tilePosition.Position.Y)
+            if (pacmanOldPositon.Y + pacmanAabb.Size.Y <= tilePosition.Position.Y)
             {
-                ref var playerVelocity = ref player.Get<VelocityComponent>();
+                ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
 
-                playerVelocity.Value.Y = tilePosition.Position.Y - playerAabb.Size.Y - bodyPosition.Position.Y - _offset;
+                pacmanVelocity.Value.Y = tilePosition.Position.Y - pacmanAabb.Size.Y - bodyPosition.Position.Y;
+
+                CheckOldDirection(pacman);
 
                 return true;
             }
@@ -142,58 +135,95 @@ namespace Pacman.Core.Collision
             return false;
         }
 
-        private bool LeftSolidTileCollision(Entity player, Entity tile)
+        private bool LeftSolidTileCollision(Entity pacman, Entity tile)
         {
-            ref var bodyPosition = ref player.Get<BodyComponent>();
-            ref var playerAabb = ref player.Get<AabbComponent>();
+            ref var bodyPosition = ref pacman.Get<BodyComponent>();
+            ref var pacmanAabb = ref pacman.Get<AabbComponent>();
             ref var tilePosition = ref tile.Get<BodyComponent>();
 
-            var playerOldPositon = bodyPosition.Position;
+            var pacmanOldPositon = bodyPosition.Position;
 
-            if (playerOldPositon.X + playerAabb.Size.X <= tilePosition.Position.X)
+            if (pacmanOldPositon.X + pacmanAabb.Size.X <= tilePosition.Position.X)
             {
-                ref var playerVelocity = ref player.Get<VelocityComponent>();
-                playerVelocity.Value.X = tilePosition.Position.X - playerAabb.Size.X - bodyPosition.Position.X - _offset;
+                ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
+                pacmanVelocity.Value.X = tilePosition.Position.X - pacmanAabb.Size.X - bodyPosition.Position.X;
+
+                CheckOldDirection(pacman);
+
                 return true;
             }
 
             return false;
         }
 
-        private bool RightSolidTileCollision(Entity player, Entity tile)
+        private bool RightSolidTileCollision(Entity pacman, Entity tile)
         {
-            ref var bodyPosition = ref player.Get<BodyComponent>();
+            ref var bodyPosition = ref pacman.Get<BodyComponent>();
             ref var tilePosition = ref tile.Get<BodyComponent>();
             ref var tileAabb = ref tile.Get<AabbComponent>();
 
-            var playerOldPositon = bodyPosition.Position;
+            var pacmanOldPositon = bodyPosition.Position;
 
-            if (playerOldPositon.X >= tilePosition.Position.X + tileAabb.Size.X)
+            if (pacmanOldPositon.X >= tilePosition.Position.X + tileAabb.Size.X)
             {
-                ref var playerVelocity = ref player.Get<VelocityComponent>();
-                playerVelocity.Value.X = tilePosition.Position.X + tileAabb.Size.X - bodyPosition.Position.X + _offset;
+                ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
+                pacmanVelocity.Value.X = tilePosition.Position.X + tileAabb.Size.X - bodyPosition.Position.X;
+
+                CheckOldDirection(pacman);
+
                 return true;
             }
 
             return false;
         }
 
-        private bool BottomSolidTileCollision(Entity player, Entity tile)
+        private bool BottomSolidTileCollision(Entity pacman, Entity tile)
         {
-            ref var bodyPosition = ref player.Get<BodyComponent>();
+            ref var bodyPosition = ref pacman.Get<BodyComponent>();
             ref var tilePosition = ref tile.Get<BodyComponent>();
             ref var tileAabb = ref tile.Get<AabbComponent>();
 
-            var playerOldPositon = bodyPosition.Position;
+            var pacmanOldPositon = bodyPosition.Position;
 
-            if (playerOldPositon.Y >= tilePosition.Position.Y + tileAabb.Size.Y)
+            if (pacmanOldPositon.Y >= tilePosition.Position.Y + tileAabb.Size.Y)
             {
-                ref var playerVelocity = ref player.Get<VelocityComponent>();
-                playerVelocity.Value.Y = tilePosition.Position.Y + tileAabb.Size.Y - bodyPosition.Position.Y + _offset;
+                ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
+                pacmanVelocity.Value.Y = tilePosition.Position.Y + tileAabb.Size.Y - bodyPosition.Position.Y;
+
+                CheckOldDirection(pacman);
+
                 return true;
             }
 
             return false;
+        }
+
+        private void CheckOldDirection(Entity pacman)
+        {
+            ref var pacmanComponent = ref pacman.Get<PacmanComponent>();
+            ref var pacmanVelocity = ref pacman.Get<VelocityComponent>();
+
+            if (pacmanComponent.Movement != pacmanComponent.OldMovement)
+            {
+                if (pacmanComponent.OldMovement == Enums.MovementType.Left)
+                {
+                    pacmanVelocity.Value = new Vector2(-2, 0);
+                }
+                else if (pacmanComponent.OldMovement == Enums.MovementType.Right)
+                {
+                    pacmanVelocity.Value = new Vector2(2, 0);
+                }
+                else if (pacmanComponent.OldMovement == Enums.MovementType.Up)
+                {
+                    pacmanVelocity.Value = new Vector2(0, -2);
+                }
+                else if (pacmanComponent.OldMovement == Enums.MovementType.Down)
+                {
+                    pacmanVelocity.Value = new Vector2(0, 2);
+                }
+
+                pacmanComponent.Movement = pacmanComponent.OldMovement;
+            }
         }
     }
 }
