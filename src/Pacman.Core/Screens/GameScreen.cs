@@ -30,7 +30,9 @@ namespace Pacman.Core.Screens
             var map = _content.Load<Map>(FirstLevel);
 
             _onUpdateSystem = new SequentialSystem<GameTime>(
-                new MapSystem(_world, map));
+                new MapSystem(_world, map),
+                new PacmanSystem(_world, game.Input),
+                new TileCollisionSystem(_world));
 
             var pacmanTextureAtlas = new TextureAtlas<PacmanTextureAtlas>(_content.Load<Texture2D>("pacman_tileset"));
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Blinky, new Microsoft.Xna.Framework.Rectangle(32, 32, 32, 32));

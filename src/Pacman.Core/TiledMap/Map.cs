@@ -5,7 +5,6 @@ namespace Pacman.Core.TiledMap
     public class Map
     {
         public int Height { get; }
-
         public int Width { get; }
         public int TileHeight { get; }
         public int TileWidth { get; }

@@ -53,7 +53,7 @@ namespace Pacman.Core.Systems
                 var tileset = _map.Tilesets.Where(t => t.Contains(tile)).Single();
                 var definition = tileset.GetDefinition(tile);
 
-                if (!string.IsNullOrWhiteSpace(definition.Type) && Enum.TryParse<TileType>(definition.Type, out var type))
+                if (!string.IsNullOrWhiteSpace(definition.Type) && Enum.TryParse<TileType>(definition.Type, out var type) && type is TileType.Solid)
                 {
                     var tileEntity = _world.CreateEntity();
                     tileEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth, (i / _map.Width) * _map.TileHeight) });
@@ -70,10 +70,12 @@ namespace Pacman.Core.Systems
                 if (o.Name.Equals(Pacman) && o is TiledMap.Rectangle pacman)
                 {
                     var entity = _world.CreateEntity();
-                    entity.Set<PacmanComponent>();
+                    entity.Set(new PacmanComponent { CurrentMovement = MovementType.Idle, NextMovement = MovementType.Idle});
                     entity.Set(new BodyComponent { Position = new Vector2(pacman.X, pacman.Y) });
                     entity.Set(new AabbComponent { Size = new Vector2(pacman.Width, pacman.Height) });
                     entity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Pacman });
+                    entity.Set(new VelocityComponent());
+                    entity.Set(new CollisionComponent());
                 }
                 else if (o.Name.Equals(Inky) && o is TiledMap.Rectangle inky)
                 {

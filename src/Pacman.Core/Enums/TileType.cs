@@ -3,8 +3,8 @@
     internal enum TileType
     {
         None = -1,
-        Solid = 0,
-        Dot = 1,
-        BigDot = 2,
+        Solid = 1,
+        Dot = 2,
+        BigDot = 3,
     }
 }
