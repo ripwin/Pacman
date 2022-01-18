@@ -14,10 +14,19 @@ namespace Pacman.Core.Collision
             ref var playerPosition = ref player.Get<BodyComponent>();
             ref var playerVelocity = ref player.Get<VelocityComponent>();
 
-            if (target.Has<TileComponent>())
+            if (target.Has<DotComponent>())
+            {
+                CollidedWithDot(player, target, collisionAxis);
+            }
+            else if (target.Has<TileComponent>())
             {
                 CollidedWithTile(player, target, collisionAxis);
             }
+        }
+
+        private static void CollidedWithDot(Entity pacman, Entity dot, CollisionAxis collisionAxis)
+        {
+            dot.Dispose();
         }
 
         private static void CollidedWithTile(Entity pacman, Entity tile, CollisionAxis collisionAxis)

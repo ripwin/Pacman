@@ -6,6 +6,8 @@
         Clyde,
         Inky,
         Pinky,
-        Pacman
+        Pacman,
+        Dot,
+        BigDot
     }
 }

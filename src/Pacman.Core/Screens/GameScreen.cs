@@ -32,7 +32,7 @@ namespace Pacman.Core.Screens
             _onUpdateSystem = new SequentialSystem<GameTime>(
                 new MapSystem(_world, map),
                 new PacmanSystem(_world, game.Input),
-                new TileCollisionSystem(_world));
+                new CollisionSystem(_world));
 
             var pacmanTextureAtlas = new TextureAtlas<PacmanTextureAtlas>(_content.Load<Texture2D>("pacman_tileset"));
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Blinky, new Microsoft.Xna.Framework.Rectangle(32, 32, 32, 32));
@@ -40,6 +40,8 @@ namespace Pacman.Core.Screens
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Inky, new Microsoft.Xna.Framework.Rectangle(32, 96, 32, 32));
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Pinky, new Microsoft.Xna.Framework.Rectangle(32, 64, 32, 32));
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Pacman, new Microsoft.Xna.Framework.Rectangle(32, 0, 32, 32));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Dot, new Microsoft.Xna.Framework.Rectangle(166, 166, 4, 4));
+            pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.BigDot, new Microsoft.Xna.Framework.Rectangle(176, 160, 16, 16));
 
             _onRenderSystem = new SequentialSystem<GameTime>(
                 new MapGraphicsSystem(_world, map, _spriteBatch),

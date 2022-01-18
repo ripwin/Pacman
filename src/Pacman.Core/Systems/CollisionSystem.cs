@@ -12,13 +12,13 @@ namespace Pacman.Core.Systems
         Y
     }
 
-    internal sealed class TileCollisionSystem : AEntitySetSystem<GameTime>
+    internal sealed class CollisionSystem : AEntitySetSystem<GameTime>
     {
         private readonly EntitySet _movingEntitiesSet;
         private readonly World _world;
 
-        public TileCollisionSystem(World world)
-            : base(world.GetEntities().With<AabbComponent>().With<BodyComponent>().With<TileComponent>().AsSet())
+        public CollisionSystem(World world)
+            : base(world.GetEntities().With<AabbComponent>().With<BodyComponent>().WithEither<TileComponent>().Or<DotComponent>().AsSet())
         {
             _world = world;
 
@@ -39,6 +39,11 @@ namespace Pacman.Core.Systems
             {
                 var aabbTile = tileEntity.Get<AabbComponent>();
                 var bodyTile = tileEntity.Get<BodyComponent>();
+
+                if (tileEntity.Has<DotComponent>())
+                { 
+                
+                }
 
                 foreach (var movingEntity in _movingEntitiesSet.GetEntities())
                 {

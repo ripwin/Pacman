@@ -53,12 +53,31 @@ namespace Pacman.Core.Systems
                 var tileset = _map.Tilesets.Where(t => t.Contains(tile)).Single();
                 var definition = tileset.GetDefinition(tile);
 
-                if (!string.IsNullOrWhiteSpace(definition.Type) && Enum.TryParse<TileType>(definition.Type, out var type) && type is TileType.Solid)
+                if (!string.IsNullOrWhiteSpace(definition.Type) && Enum.TryParse<TileType>(definition.Type, out var type))
                 {
-                    var tileEntity = _world.CreateEntity();
-                    tileEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth, (i / _map.Width) * _map.TileHeight) });
-                    tileEntity.Set(new AabbComponent { Size = new Vector2(_map.TileWidth, _map.TileHeight) });
-                    tileEntity.Set(new TileComponent { Value = tileLayer.Tiles[i].Value, Type = type });
+                    if (type is TileType.Solid)
+                    {
+                        var tileEntity = _world.CreateEntity();
+                        tileEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth, (i / _map.Width) * _map.TileHeight) });
+                        tileEntity.Set(new AabbComponent { Size = new Vector2(_map.TileWidth, _map.TileHeight) });
+                        tileEntity.Set(new TileComponent { Value = tileLayer.Tiles[i].Value, Type = type });
+                    }
+                    else if (type is TileType.Dot)
+                    {
+                        var dotEntity = _world.CreateEntity();
+                        dotEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth + 8, (i / _map.Width) * _map.TileHeight + 8) });
+                        dotEntity.Set(new AabbComponent { Size = new Vector2(4, 4) });
+                        dotEntity.Set(new DotComponent { IsBig = false });
+                        dotEntity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.Dot });
+                    }
+                    else if (type is TileType.BigDot)
+                    {
+                        var bigDotEntity = _world.CreateEntity();
+                        bigDotEntity.Set(new BodyComponent { Position = new Vector2((i % _map.Width) * _map.TileWidth + 8, (i / _map.Width) * _map.TileHeight + 8) });
+                        bigDotEntity.Set(new AabbComponent { Size = new Vector2(16, 16) });
+                        bigDotEntity.Set(new DotComponent { IsBig = true });
+                        bigDotEntity.Set(new TextureComponent { Value = (int)PacmanTextureAtlas.BigDot });
+                    }
                 }
             }
         }
