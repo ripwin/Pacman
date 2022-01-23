@@ -30,7 +30,7 @@ namespace Pacman.Core.Systems
                 .With<CollisionComponent>()
                 .AsSet();
 
-            _world.Subscribe(new PacmanCollision());
+            _world.Subscribe(new PacmanCollision(_world));
         }
 
         protected override void Update(GameTime state, ReadOnlySpan<Entity> entities) 

@@ -7,9 +7,9 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tmx
     public abstract class Layer
     {
         [XmlAttribute("id")]
-        public int Id { get; }
+        public int Id { get; set; }
 
         [XmlAttribute("name")]
-        public string? Name { get; }
+        public string? Name { get; set; }
     }
 }

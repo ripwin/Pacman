@@ -5,15 +5,15 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tmx
     public class Data
     {
         [XmlAttribute("encoding")]
-        public Encoding? Encoding { get; }
+        public Encoding Encoding { get; set; }
 
         [XmlAttribute("compression")]
-        public Compression? Compression { get; }
+        public Compression Compression { get; set; }
 
         [XmlText]
-        public string? EncodedData { get; }
+        public string? EncodedData { get; set; }
 
         [XmlElement("tile")]
-        public List<ReferenceTile> Tiles { get; } = new();
+        public List<ReferenceTile> Tiles { get; set; } = new();
     }
 }

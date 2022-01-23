@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Pacman.Core.Components;
 using Pacman.Core.Enums;
-using Pacman.Core.Graphics;
+using Pacman.Core.Utils;
 
 namespace Pacman.Core.Systems
 {
@@ -19,7 +19,7 @@ namespace Pacman.Core.Systems
             World world,
             SpriteBatch spriteBatch,
             TextureAtlas<PacmanTextureAtlas> pacmanTextureAtlas)
-            : base(world.GetEntities().With<BodyComponent>().With<AabbComponent>().With<TextureComponent>().AsSet())
+            : base(world.GetEntities().With<BodyComponent>().With<AabbComponent>().WithEither<TextureComponent>().AsSet())
         {
             _spriteBatch = spriteBatch;
             _pacmanTextureAtlas = pacmanTextureAtlas;
@@ -39,7 +39,7 @@ namespace Pacman.Core.Systems
             ref var aabb = ref entity.Get<AabbComponent>();
             ref var textureComponent = ref entity.Get<TextureComponent>();
 
-            var sourceRectangle = _pacmanTextureAtlas.GetRegion((PacmanTextureAtlas)textureComponent.Value);
+            var sourceRectangle = _pacmanTextureAtlas.GetRegion(textureComponent.Value);
             var texture = _pacmanTextureAtlas.Texture();
 
             _spriteBatch.Draw(

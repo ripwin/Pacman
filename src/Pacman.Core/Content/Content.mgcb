@@ -10,9 +10,16 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\Pacman.ContentPipelineExtension\bin\Debug\netstandard2.1\Pacman.ContentPipelineExtension.dll
+/reference:..\..\Pacman.ContentPipelineExtension\bin\Debug\netstandard2.0\Pacman.ContentPipelineExtension.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin general.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:general.spritefont
 
 #begin level_1.tmx
 /importer:TmxImporter

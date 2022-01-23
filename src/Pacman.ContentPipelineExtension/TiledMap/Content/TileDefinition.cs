@@ -2,12 +2,12 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Content
 {
     public class TileDefinition
     {
-        public int Tile { get; init; }
+        public int Tile { get; set; }
 
-        public string Type { get; init; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
 
-        public List<(int tile, float duration)> Frames { get; init; } = new();
+        public List<(int tile, float duration)> Frames { get; set; } = new();
 
-        public List<(string name, string value)> Properties { get; init; } = new();
+        public List<(string name, string value)> Properties { get; set; } = new();
     }
 }

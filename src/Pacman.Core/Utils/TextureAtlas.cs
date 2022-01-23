@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pacman.Core.Graphics
+namespace Pacman.Core.Utils
 {
     internal class TextureAtlas<T> where T : notnull
     {

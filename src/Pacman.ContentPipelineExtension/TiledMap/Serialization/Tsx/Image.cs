@@ -8,9 +8,9 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tsx
         public string Source { get; set; } = null!;
 
         [XmlAttribute("width")]
-        public int Width { get; }
+        public int Width { get; set; }
 
         [XmlAttribute("height")]
-        public int Height { get; }
+        public int Height { get; set; }
     }
 }

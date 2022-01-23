@@ -151,6 +151,29 @@ namespace Pacman.ContentPipelineExtension.TiledMap
                     }
                 }
 
+                // Texts
+                output.Write(layer.Texts.Count);
+
+                foreach (var (name, type, x, y, width, height, value, properties) in layer.Texts)
+                {
+                    output.Write(name);
+                    output.Write(type);
+                    output.Write(x);
+                    output.Write(y);
+                    output.Write(width);
+                    output.Write(height);
+                    output.Write(value);
+
+                    // Properties
+                    output.Write(properties.Count);
+
+                    foreach (var property in properties)
+                    {
+                        output.Write(property.name);
+                        output.Write(property.value);
+                    }
+                }
+
                 // Rectangles
                 output.Write(layer.Rectangles.Count);
 

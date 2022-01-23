@@ -112,6 +112,10 @@ namespace Pacman.ContentPipelineExtension.TiledMap
 
                             objects.Polygons.Add((name, type, o.X, o.Y, points, properties));
                         }
+                        else if (o.ObjectType is Text text)
+                        {
+                            objects.Texts.Add((name, type, o.X, o.Y, o.Width, o.Height, text.Value, properties));
+                        }
                         else
                         {
                             objects.Rectangles.Add((name, type, o.X, o.Y, o.Width, o.Height, properties));

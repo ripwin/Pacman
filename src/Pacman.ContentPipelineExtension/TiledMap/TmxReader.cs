@@ -136,6 +136,30 @@ namespace Pacman.ContentPipelineExtension.TiledMap
                     objects.Add(new Polygon(name, type, x, y, points, properties));
                 }
 
+                // Texts
+                var textCount = input.ReadInt32();
+                for (var j = 0; j < textCount; j++)
+                {
+                    var name = input.ReadString();
+                    var type = input.ReadString();
+                    var x = input.ReadSingle();
+                    var y = input.ReadSingle();
+                    var width = input.ReadSingle();
+                    var height = input.ReadSingle();
+                    var value = input.ReadString();
+
+                    // properties
+                    var propertyCount = input.ReadInt32();
+                    var properties = new List<Property>();
+
+                    for (var k = 0; k < propertyCount; k++)
+                    {
+                        properties.Add(new Property(input.ReadString(), input.ReadString()));
+                    }
+
+                    objects.Add(new Text(name, type, x, y, width, height, value, properties));
+                }
+
                 // Rectangles
                 var rectangleCount = input.ReadInt32();
                 for (var j = 0; j < rectangleCount; j++)

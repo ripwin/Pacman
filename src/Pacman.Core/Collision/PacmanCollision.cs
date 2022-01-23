@@ -6,6 +6,11 @@ namespace Pacman.Core.Collision
 {
     internal class PacmanCollision
     {
+        private readonly World _world;
+
+        public PacmanCollision(World world)
+            => _world = world;
+
         [Subscribe]
         private void On(in (PacmanComponent, Entity, Entity, CollisionAxis) message)
         {
@@ -16,7 +21,7 @@ namespace Pacman.Core.Collision
 
             if (target.Has<DotComponent>())
             {
-                CollidedWithDot(player, target, collisionAxis);
+                CollidedWithDot(player, target);
             }
             else if (target.Has<TileComponent>())
             {
@@ -24,8 +29,17 @@ namespace Pacman.Core.Collision
             }
         }
 
-        private static void CollidedWithDot(Entity pacman, Entity dot, CollisionAxis collisionAxis)
+        private void CollidedWithDot(Entity _, Entity dot)
         {
+            var dotComponent = dot.Get<DotComponent>();
+
+            var scores = _world.GetEntities().With<ScoreComponent>().AsSet();
+            foreach (var score in scores.GetEntities())
+            {
+                ref var scoreComponent = ref score.Get<ScoreComponent>();
+                scoreComponent.Score += dotComponent.IsBig ? 50 : 10;
+            }
+
             dot.Dispose();
         }
 

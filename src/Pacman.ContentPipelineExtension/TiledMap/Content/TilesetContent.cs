@@ -4,17 +4,17 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Content
 {
     public class TilesetContent
     {
-        public int FirstGid { get; init; }
+        public int FirstGid { get; set; }
 
-        public string Name { get; init; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public int TileHeight { get; init; }
+        public int TileHeight { get; set; }
 
-        public int TileWidth { get; init; }
+        public int TileWidth { get; set; }
 
-        public Texture2DContent Image { get; init; } = null!;
+        public Texture2DContent Image { get; set; } = null!;
 
-        public List<TileDefinition> TileDefinitions { get; init; }
+        public List<TileDefinition> TileDefinitions { get; set; }
 
         public TilesetContent()
         {

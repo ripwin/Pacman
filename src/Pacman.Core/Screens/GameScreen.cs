@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Pacman.Core.Enums;
-using Pacman.Core.Graphics;
+using Pacman.Core.Utils;
 using Pacman.Core.Systems;
 using Pacman.Core.TiledMap;
 
@@ -43,9 +43,13 @@ namespace Pacman.Core.Screens
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.Dot, new Microsoft.Xna.Framework.Rectangle(166, 166, 4, 4));
             pacmanTextureAtlas.AddRegion(PacmanTextureAtlas.BigDot, new Microsoft.Xna.Framework.Rectangle(176, 160, 16, 16));
 
+            var pacmanFontAtlas = new FontAtlas<PacmanFontAtlas>();
+            pacmanFontAtlas.AddFont(PacmanFontAtlas.General, _content.Load<SpriteFont>("General"));
+
             _onRenderSystem = new SequentialSystem<GameTime>(
                 new MapGraphicsSystem(_world, map, _spriteBatch),
-                new GraphicsSystem(_world, _spriteBatch, pacmanTextureAtlas));
+                new GraphicsSystem(_world, _spriteBatch, pacmanTextureAtlas),
+                new FontSystem(_world, _spriteBatch, pacmanFontAtlas));
         }
 
         public void Draw(GameTime gameTime)

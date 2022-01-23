@@ -2,8 +2,8 @@
 
 namespace Pacman.Core.Components
 {
-    internal struct TextureComponent
+    internal struct FontComponent
     {
-        public PacmanTextureAtlas Value;
+        public PacmanFontAtlas Value;
     }
 }

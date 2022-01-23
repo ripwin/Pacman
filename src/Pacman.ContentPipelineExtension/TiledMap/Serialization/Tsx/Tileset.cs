@@ -5,39 +5,39 @@ namespace Pacman.ContentPipelineExtension.TiledMap.Serialization.Tsx
     public class Tileset
     {
         [XmlAttribute("firstgid")]
-        public int FirstGid { get; }
+        public int FirstGid { get; set; }
 
         [XmlAttribute("source")]
-        public string? Source { get; }
+        public string? Source { get; set; }
 
         [XmlAttribute("version")]
-        public string? Version { get; }
+        public string? Version { get; set; }
 
         [XmlAttribute("tiledversion")]
-        public string? TiledVersion { get; }
+        public string? TiledVersion { get; set; }
 
         [XmlAttribute("name")]
-        public string Name { get; } = null!;
+        public string Name { get; set; } = null!;
 
         [XmlAttribute("tilewidth")]
-        public int TileWidth { get; }
+        public int TileWidth { get; set; }
 
         [XmlAttribute("tileheight")]
-        public int TileHeight { get; }
+        public int TileHeight { get; set; }
 
         [XmlAttribute("spacing")]
-        public int Spacing { get; }
+        public int Spacing { get; set; }
 
         [XmlAttribute("tilecount")]
-        public int TileCount { get; }
+        public int TileCount { get; set; }
 
         [XmlAttribute("columns")]
-        public int Columns { get; }
+        public int Columns { get; set; }
 
         [XmlElement("image")]
-        public Image Image { get; } = null!;
+        public Image Image { get; set; } = null!;
 
         [XmlElement("tile")]
-        public List<Tile> Tiles { get; } = new();
+        public List<Tile> Tiles { get; set; } = new();
     }
 }
