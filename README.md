@@ -1,5 +1,5 @@
 # Pacman
-Just remaking Pacman for fun with Monogame and .NET 6.
+Just remaking Pacman for fun with Monogame and .NET core.
 
 ## Third party libraries and tools
 [Monogame](https://www.monogame.net/)  
